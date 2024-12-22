@@ -1,0 +1,118 @@
+--PUser table
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('GamerGal', TO_DATE('2021-03-15', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('PixelPioneer', TO_DATE('2020-06-11', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('RetroRex', TO_DATE('2019-08-23', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('8BitBard', TO_DATE('2022-01-01', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('ArcadeAce', TO_DATE('2021-05-17', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('LevelLord', TO_DATE('2020-12-30', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('XPXplorer', TO_DATE('2018-07-04', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('ConsoleCaptain', TO_DATE('2019-11-13', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('VirtualViking', TO_DATE('2020-02-22', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('QuestMaster', TO_DATE('2021-10-10', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('SpriteSeeker', TO_DATE('2020-04-29', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('DungeonDiva', TO_DATE('2019-09-15', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('ButtonBasher', TO_DATE('2022-02-10', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('ComboKing', TO_DATE('2021-08-05', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('PixelPaladin', TO_DATE('2019-12-12', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('CodeCrusader', TO_DATE('2020-03-03', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('HackHero', TO_DATE('2018-11-09', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('RPGWanderer', TO_DATE('2022-04-04', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('JoystickJedi', TO_DATE('2020-06-19', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('ArcadiaQueen', TO_DATE('2019-05-25', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('PowerUpPrince', TO_DATE('2021-07-07', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('AchievementHunter', TO_DATE('2020-09-14', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('ConsoleCowboy', TO_DATE('2018-01-20', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('SavePointSam', TO_DATE('2019-10-31', 'YYYY-MM-DD'));
+INSERT INTO PUser (userNickname, userAccountCreated) VALUES ('RespawnRanger', TO_DATE('2020-05-18', 'YYYY-MM-DD'));
+
+--Genre table
+INSERT INTO Genre (genName) VALUES ('Action');
+INSERT INTO Genre (genName) VALUES ('Adventure');
+INSERT INTO Genre (genName) VALUES ('RPG');
+INSERT INTO Genre (genName) VALUES ('Shooter');
+INSERT INTO Genre (genName) VALUES ('Puzzle');
+INSERT INTO Genre (genName) VALUES ('Strategy');
+INSERT INTO Genre (genName) VALUES ('Sports');
+INSERT INTO Genre (genName) VALUES ('Simulation');
+INSERT INTO Genre (genName) VALUES ('Horror');
+INSERT INTO Genre (genName) VALUES ('Platformer');
+
+--Developer table
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Epic Games', TO_TIMESTAMP('1991-05-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Valve Corporation', TO_TIMESTAMP('1996-08-24', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Nintendo', TO_TIMESTAMP('1889-09-23', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Ubisoft', TO_TIMESTAMP('1986-03-28', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Rockstar Games', TO_TIMESTAMP('1998-12-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Bethesda Game Studios', TO_TIMESTAMP('2001-06-28', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Blizzard Entertainment', TO_TIMESTAMP('1991-02-08', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('CD Projekt Red', TO_TIMESTAMP('2002-05-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('FromSoftware', TO_TIMESTAMP('1986-11-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Square Enix', TO_TIMESTAMP('1986-04-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Capcom', TO_TIMESTAMP('1979-05-30', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Electronic Arts', TO_TIMESTAMP('1982-05-27', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Insomniac Games', TO_TIMESTAMP('1994-02-03', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Bungie', TO_TIMESTAMP('1991-05-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Naughty Dog', TO_TIMESTAMP('1984-09-27', 'YYYY-MM-DD'));
+
+--Publisher table
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Stellar Games', '[{"devID": 1}, {"devID": 2}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('RedLeaf Studios', '[{"devID": 3}, {"devID": 4}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Cosmic Interactive', '[{"devID": 5}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('BlueStar Publishing', '[{"devID": 6}, {"devID": 7}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('NovaForge Games', '[{"devID": 8}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Pixel Planet', '[{"devID": 9}, {"devID": 10}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('IronWave Studios', '[{"devID": 11}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Quantum Creations', '[{"devID": 12}, {"devID": 13}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Apex Entertainment', '[{"devID": 14}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Radiant Sun Games', '[{"devID": 15}]');
+
+
+INSERT INTO Games (gName, gGenre, gDeveloper, gPublisher, gReleaseDate, gTimeToComplete, gRetailPrice) VALUES
+('Cosmic Crusaders', 1, 1, 1, TO_DATE('2023-01-15', 'YYYY-MM-DD'), 40, 60),
+('Legend of the Void', 2, 2, 2, TO_DATE('2022-05-22', 'YYYY-MM-DD'), 50 DAY TO SECOND, 70),
+('Pixel Planet Adventure', 3, 3, 2, TO_DATE('2023-10-03', 'YYYY-MM-DD'), 30, 50),
+('CyberHunter', 4, 4, 3, TO_DATE('2024-04-12', 'YYYY-MM-DD'), INTERVAL 20, 40),
+('NovaForge Saga', 5, 5, 4, TO_DATE('2021-11-25', 'YYYY-MM-DD'), 60, 80),
+('Radiant Sunfall', 6, 6, 4, TO_DATE('2023-06-18', 'YYYY-MM-DD'), 25, 55),
+('IronWave Tactics', 7, 7, 5, TO_DATE('2020-02-09', 'YYYY-MM-DD'), 35, 45),
+('Quantum Realms', 8, 8, 6, TO_DATE('2019-12-01', 'YYYY-MM-DD'), 40, 70),
+('Apex Legends Origins', 9, 9, 7, TO_DATE('2024-07-30', 'YYYY-MM-DD'), 30, 60),
+('BlueStar Odyssey', 10, 10, 7, TO_DATE('2022-03-21', 'YYYY-MM-DD'), 55, 75),
+('Stellar Space Siege', 1, 11, 8, TO_DATE('2023-09-14', 'YYYY-MM-DD'), 45, 65),
+('RedLeaf Chronicles', 2, 12, 9, TO_DATE('2021-08-07', 'YYYY-MM-DD'), 25, 50),
+('Pixel Brawl Arena', 3, 13, 9, TO_DATE('2024-01-18', 'YYYY-MM-DD'), 10, 30),
+('Cosmic Carnage', 4, 14, 10, TO_DATE('2023-12-02', 'YYYY-MM-DD'), 35, 55),
+('CyberRunner', 5, 15, 10, TO_DATE('2020-10-13', 'YYYY-MM-DD'), 20, 40),
+('Legendary Battlegrounds', 6, 1, 1, TO_DATE('2023-11-22', 'YYYY-MM-DD'), 50, 70),
+('Forge of Eternity', 7, 2, 2, TO_DATE('2022-07-19', 'YYYY-MM-DD'), 40, 60),
+('Radiant Fall', 8, 3, 2, TO_DATE('2023-02-28', 'YYYY-MM-DD'), 30, 50),
+('NovaLight Chronicles', 9, 4, 3, TO_DATE('2024-06-01', 'YYYY-MM-DD'), 35, 55),
+('Pixel Wars', 10, 5, 4, TO_DATE('2021-09-15', 'YYYY-MM-DD'), 15, 35),
+('IronWave Blitz', 1, 6, 4, TO_DATE('2023-04-09', 'YYYY-MM-DD'), 45, 65),
+('Quantum Siege', 2, 7, 5, TO_DATE('2020-03-30', 'YYYY-MM-DD'), 25, 45),
+('Apex Rising', 3, 8, 6, TO_DATE('2019-11-10', 'YYYY-MM-DD'), 50, 75),
+('BlueStar Guardians', 4, 9, 7, TO_DATE('2024-08-16', 'YYYY-MM-DD'), 35, 55),
+('Stellar Conflict', 5, 10, 7, TO_DATE('2022-12-05', 'YYYY-MM-DD'), 20, 40),
+('RedLeaf Adventures', 6, 11, 8, TO_DATE('2023-05-08', 'YYYY-MM-DD'), 30, 50),
+('Cosmic Heist', 7, 12, 9, TO_DATE('2021-04-03', 'YYYY-MM-DD'), 40, 70),
+('CyberQuest', 8, 13, 9, TO_DATE('2024-02-19', 'YYYY-MM-DD'), 25, 45),
+('Legend of Nova', 9, 14, 10, TO_DATE('2023-10-27', 'YYYY-MM-DD'), 50, 75);
