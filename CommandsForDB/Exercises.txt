@@ -1,0 +1,10 @@
+-- 1. feladat
+-- Listázz ki minden olyan játékot ahol az értékelések átlaga minimum 5
+
+select distinct g.gName from Games g
+join Reviews r on g.gID = r.gameid
+group by g.gName
+having avg(JSON_VALUE(reviewData, '$.rating' returning number)) >= 5;
+
+-- 2. feladat
+-- 

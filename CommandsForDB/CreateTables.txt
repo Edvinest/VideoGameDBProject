@@ -42,9 +42,14 @@ CREATE TABLE Games (
     gReleaseDate DATE,
     gHoursToComplete INTEGER,
     gRetailPrice INTEGER CHECK (gRetailPrice >= 0),
+    gCurrentPlayerCount INTEGER DEFAULT 0 CHECK (gCurrentPlayerCount >= 0),
+    gMaxPlayerCount INTEGER DEFAULT 0,
     FOREIGN KEY (gGenre) REFERENCES Genre(genID),
     FOREIGN KEY (gDeveloper) REFERENCES Developer(dID),
-    FOREIGN KEY (gPublisher) REFERENCES Publisher(pID)
+    FOREIGN KEY (gPublisher) REFERENCES Publisher(pID),
+    
+    CHECK (gMaxPlayerCount >= gCurrentPlayerCount AND gMaxPlayerCount >= 0)
+
 );
 
 CREATE TABLE UserOwnedGames (

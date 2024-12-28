@@ -20,9 +20,15 @@ export class Games {
   @Column({ type: 'date' , name: 'GRELEASEDATE'})
   gReleaseDate!: Date;
 
-  @Column({type: 'varchar', length: 50, name: 'GHOURSTOCOMPLETE'})
-  gHoursToComplete!: string;
+  @Column({type: 'int', name: 'GHOURSTOCOMPLETE'})
+  gHoursToComplete!: number;
 
   @Column({type: 'int', default: 0, name: 'GRETAILPRICE'})
   gRetailPrice!: number;
+
+  @Column({type: 'int', default: 0, name: 'GCURRENTPLAYERCOUNT'})
+  gCurrentPlayerCount!: number;
+
+  @Column({type: 'int', default: 0, name: 'GMAXPLAYERCOUNT'})
+  gMaxPlayerCount!: number;
 }
