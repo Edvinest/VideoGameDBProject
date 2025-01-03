@@ -7,4 +7,4 @@ group by g.gName
 having avg(JSON_VALUE(reviewData, '$.rating' returning number)) >= 5;
 
 -- 2. feladat
--- 
+-- Melyik két felhasználó vált barátokká legközelebb egy játék kiadási dátumával?
