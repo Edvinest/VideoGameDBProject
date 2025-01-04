@@ -19,17 +19,24 @@ order by ABS(TRUNC(g.gReleaseDate - f.following_since)) asc
 FETCH FIRST 1 ROWS ONLY;
 
 -- 3. feladat
--- Mia Anderson, a Square Enix dolgozója a 2023-10-27-én kiadott játékuk után otthagyta a céget. Töröld ki!
+-- Átlagosan, mennyivel játszanak többet a felhasználók, mint a játéknál kiírt idő
 
-delete from Employee
-where eName = 'Mia Anderson'
-and eDevCompID = ( select dID from Developer where dName = 'Square Enix');
+select g.gName, g.gHoursToComplete, round(avg(extract(day from uog.timePlayed) * 24 +
+extract(hour from uog.timePlayed) + extract(minute from uog.timePlayed) * 60 + extract(second from uog.timePlayed) * 3600), 2) as AvgTimePlayed
+from Games g
+join UserOwnedGames uog on g.gID = uog.gameID
+group by g.gName, g.gHoursToComplete;
 
 -- 4. feladat
--- Az 1-es ID-jú játék kompózere megváltozott kiadás előtt, változtasd meg az ID-t 30asra
-update soundtrack
-set composer = 30
-where gameid = 1;
+-- A játékosok hány százaléka fejezte be a megvásárolt játékaikat?
+
+with FinishedGame as (
+select count(*) as Completed from UserOwnedGames where hasCompleted = 1),
+AllOwnedGames as(
+    select count(*) as Total from UserOwnedGames)
+
+select round((fg.Completed * 100 / aog.Total), 2) as CompletedPercentage from FinishedGame fg
+cross join AllOwnedGames aog;
 
 -- 5. feladat
 -- Ha csinálnánk egy lejátszási listát az adatbázisban található zenékből, mennyire lenne hosszú? (Formázd nap, óra, perc és másodperc szerint)
@@ -64,7 +71,7 @@ select (sp.SelfPublisherCount * 100/ ap.TotalPublishers) as Percentage from Self
 -- 7. feladat
 -- Listázz ki minden kiadót és a cégeiket
 
-select p.pName,listagg(d.dName, ', ') within group (order by d.dName) AS "Developer(s)"
+select p.pName,listagg(d.dName, ', ') within group (order by d.dName) as "Developer(s)"
 from Publisher p
 left join json_table(
        p.pDevelopers,
@@ -72,3 +79,242 @@ left join json_table(
 ) jt on 1 = 1
 left join Developer d on jt.devID = d.dID
 group by p.pName;
+
+-- 8. feladat
+-- Nemekre bontva, kik dolgoztak többet egy adott projekten?
+
+select 'Men' as Gender, round(avg(eDaysSpentOnProject), 2) as DaysOnProject from Employee
+where eGender = 0
+
+union all
+
+Select 'Women' as Gender, round(avg(eDaysSpentOnProject), 2) as DaysOnProject from Employee
+where eGender = 1;
+
+-- 9. feladat
+-- Ha az 1-es játékos visszakapná a pénzét, mennyit kapna vissza?
+
+select distinct u.userNickname, sum(g.gRetailPrice) as MoneySpent from PUser u
+join UserOwnedGames uog on uog.userID = u.userID
+join Games g on uog.gameID = g.gID
+where u.userID = 1
+group by u.userNickname;
+
+-- 10. feladat
+-- Melyik pozíciót töltik be a legtöbben?
+
+select eProfession, count(*) as PositionCount
+from Employee
+group by eProfession
+order by PositionCount desc
+fetch first 1 rows only;
+
+-- 11. feladat
+-- Melyik játék szerepel a legtöbb kívánság listán és melyik játékot vásárolták meg a legtöbben?
+
+select g.gName, count(*) AS Amount, 'Wishlisted'
+from Games g
+join WishList w on w.gameID = g.gID
+group by g.gName
+order by Amount desc
+fetch first 1 rows only;
+
+select g.gName, count(*) AS Amount, 'Owned'
+from Games g
+join UserOwnedGames o on o.gameID = g.gID
+group by g.gName
+order by Amount desc
+fetch first 1 rows only;
+
+-- 12. feladat
+-- Melyik játéknál van a legkevesebb különbség az legtöbb játékos és a jelenlegi játékosok száma közt?
+
+select gName, gMaxPlayerCount, gCurrentPlayerCount,
+       ABS(gMaxPlayerCount - gCurrentPlayerCount) as PlayerDifference
+from Games
+order by PlayerDifference asc
+fetch first 1 rows only;
+
+
+-- 13. feladat
+-- Melyik játékon hagyták a legtöbb pozitív értékelést?
+
+select g.gName, count(*) as PositiveReviewCount
+from Games g
+join Reviews r on g.gID = r.gameID
+where json_value(r.reviewData, '$.rating') >= 8
+group by g.gName
+order by PositiveReviewCount desc
+fetch first 1 rows only;
+
+-- 14. feladat
+-- Melyik játékon dolgoztak a legtöbben?
+
+select g.gName, count(e.eID) as TotalEmployees
+from Games g
+join Employee e on g.gID = e.eGameWorkedOn
+group by g.gName
+order by TotalEmployees desc
+fetch first 1 rows only;
+
+-- 15. feladat
+-- Melyik a leghosszabb és legrövidebb felhasználónév?
+
+select
+    'Longest' as Category,
+    userNickname as Username,
+    LENGTH(userNickname) as Length
+from PUser
+where length(userNickname) = (select max(length(userNickname)) from PUser)
+
+union
+
+select
+    'Shortest' as Category,
+    userNickname as Username,
+    LENGTH(userNickname) as Length
+from PUser
+where length(userNickname) = (select min(length(userNickname)) from PUser);
+
+-- 16. feladat
+-- Zsánerekre bontva, listázd ki a játékokat
+
+select
+    g.genName AS Genre,
+    listagg(gm.gName, ', ') within group(order by gm.gName) as Games
+from Genre g
+left join Games gm on g.genID = gm.gGenre
+group by g.genName
+order by g.genName;
+
+-- 17. feladat
+-- Évekre bontva, listázd ki a játékokat
+
+select
+    extract(year from gReleaseDate) as ReleaseYear,
+    listagg(gName, ', ') within group (order by gName) as Games
+from Games
+group by extract(year from gReleaseDate)
+order by ReleaseYear;
+
+-- 18. feladat
+-- Melyik játékosnak van a legtöbb barátja és mennyi?
+
+select
+    u.userNickname,
+    COUNT(f.friendID) as FriendCount
+from Friends f
+join PUser u on f.userID = u.userID
+group by u.userNickname
+order by FriendCount desc
+fetch first 1 rows only;
+
+-- 19. feladat
+-- Ábrázold a jelenleg játékban lévő játékosok számát az eddigi legtöbb játékosok számához képest
+
+select
+    gName,
+    gCurrentPlayerCount,
+    gMaxPlayerCount,
+    round((gCurrentPlayerCount / gMaxPlayerCount) * 100, 2) as PlayerPercentage,
+    lpad('*', round((gCurrentPlayerCount / gMaxPlayerCount) * 10), '*') as StarRating
+from
+    Games
+where
+gMaxPlayerCount > 0;
+
+-- 20. feladat
+-- Válassz ki egy játékot és írj ki legalább maximum 5 hozzászólást
+
+select
+    g.gName as GameName,
+    json_value(r.reviewData, '$.rating') || '/10 - ' || json_value(r.reviewData, '$.comment') as review
+from
+    Reviews r
+join
+    Games g ON r.gameID = g.gID
+where
+    r.gameID = 1
+fetch first 5 rows only;
+
+-- Explain Plans
+-- 1.
+explain plan for
+select
+    gName,
+    gCurrentPlayerCount,
+    gMaxPlayerCount,
+    round((gCurrentPlayerCount / gMaxPlayerCount) * 100, 2) as PlayerPercentage,
+    lpad('*', round((gCurrentPlayerCount / gMaxPlayerCount) * 10), '*') as StarRating
+from
+    Games
+where
+gMaxPlayerCount > 0;
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY(format => 'ALL'));
+
+-- 2.
+explain plan for
+select
+    'Longest' as Category,
+    userNickname as Username,
+    LENGTH(userNickname) as Length
+from PUser
+where length(userNickname) = (select max(length(userNickname)) from PUser)
+
+union
+
+select
+    'Shortest' as Category,
+    userNickname as Username,
+    LENGTH(userNickname) as Length
+from PUser
+where length(userNickname) = (select min(length(userNickname)) from PUser);
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY(format => 'ALL'));
+
+-- 3.
+explain plan for
+select p.pName,listagg(d.dName, ', ') within group (order by d.dName) as "Developer(s)"
+from Publisher p
+left join json_table(
+       p.pDevelopers,
+       '$[*]' columns (devID int path'$.devID')
+) jt on 1 = 1
+left join Developer d on jt.devID = d.dID
+group by p.pName;
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY(format => 'ALL'));
+
+-- 4.
+explain plan for
+with TrackDurations as (
+    select JSON_VALUE(tracks, '$.length') as length
+    from Soundtrack),
+ConvertedDuration as (
+    select sum(extract(minute from to_dsinterval('0 00:' || length)) * 60 + extract(second from to_dsinterval('0 00:' || length))) as total_seconds
+    from TrackDurations),
+FormattedDuration as(
+    select
+        floor(total_seconds / 86400) as days,
+        floor(mod(total_seconds, 86400) / 3600) as hours,
+        floor(mod(total_seconds, 3600) / 60) as minutes,
+        mod(total_seconds, 60) as seconds
+    from ConvertedDuration)
+
+select * from FormattedDuration;
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY(format => 'ALL'));
+
+-- 5.
+explain plan for
+select p1.userNickname, p2.userNickname, g.gName, ABS(TRUNC(g.gReleaseDate - f.following_since)) as "Days since release and being friends" from Friends f
+join PUser p1 on f.userID = p1.userID
+join PUser p2 on f.friendID = p2.userID
+join UserOwnedGames u1 on u1.userid = p1.userID
+join UserOwnedGames u2 on u2.userid = p2.userID and u1.gameid = u2.gameid
+join Games g on u1.gameid = g.gID
+order by ABS(TRUNC(g.gReleaseDate - f.following_since)) asc
+FETCH FIRST 1 ROWS ONLY;
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY(format => 'ALL'));
