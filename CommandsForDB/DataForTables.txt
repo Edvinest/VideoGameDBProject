@@ -58,6 +58,16 @@ INSERT INTO Developer (dName, dFoundingDate) VALUES ('Electronic Arts', TO_TIMES
 INSERT INTO Developer (dName, dFoundingDate) VALUES ('Insomniac Games', TO_TIMESTAMP('1994-02-03', 'YYYY-MM-DD'));
 INSERT INTO Developer (dName, dFoundingDate) VALUES ('Bungie', TO_TIMESTAMP('1991-05-01', 'YYYY-MM-DD'));
 INSERT INTO Developer (dName, dFoundingDate) VALUES ('Naughty Dog', TO_TIMESTAMP('1984-09-27', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Mojang Studios', TO_TIMESTAMP('2009-05-17', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Supergiant Games', TO_TIMESTAMP('2009-09-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Team Cherry', TO_TIMESTAMP('2015-12-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Larian Studios', TO_TIMESTAMP('1996-04-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Hello Games', TO_TIMESTAMP('2008-08-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('ConcernedApe', TO_TIMESTAMP('2012-01-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Klei Entertainment', TO_TIMESTAMP('2005-07-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Facepunch Studios', TO_TIMESTAMP('2004-03-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Giant Squid', TO_TIMESTAMP('2015-03-01', 'YYYY-MM-DD'));
+INSERT INTO Developer (dName, dFoundingDate) VALUES ('Toby Fox', TO_TIMESTAMP('2015-09-15', 'YYYY-MM-DD'));
 
 --Publisher table
 INSERT INTO Publisher (pName, pDevelopers) VALUES
@@ -104,6 +114,36 @@ INSERT INTO Publisher (pName, pDevelopers) VALUES
 
 INSERT INTO Publisher (pName, pDevelopers) VALUES
 ('Nebula Nexus', '[{"devID": 5}, {"devID": 13}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Mojang Studios', '[{"devID": 41}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Supergiant Games', '[{"devID": 42}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Team Cherry', '[{"devID": 43}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Larian Studios', '[{"devID": 44}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Hello Games', '[{"devID": 45}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('ConcernedApe', '[{"devID": 46}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Klei Entertainment', '[{"devID": 47}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Facepunch Studios', '[{"devID": 48}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Giant Squid', '[{"devID": 49}]');
+
+INSERT INTO Publisher (pName, pDevelopers) VALUES
+('Toby Fox', '[{"devID": 50}]');
 
 --Insert data into Games
 INSERT INTO Games (gName, gGenre, gDeveloper, gPublisher, gReleaseDate, gHoursToComplete, gRetailPrice, gCurrentPlayerCount, gMaxPlayerCount) VALUES
@@ -207,37 +247,37 @@ INSERT INTO Friends (userID, friendID, following_since) VALUES
 (20, 17, DATE '2022-10-05');
 
 --Employee table
-INSERT INTO Employee (eDevCompID, eName, eGender, eBirthDate, eHireDate, eProfession, eDateSpentOnProject) VALUES
-(1, 'John Smith', 0, DATE '1985-04-15', DATE '2010-05-20', 'Software Engineer', 1500),
-(1, 'Jane Doe', 1, DATE '1990-07-12', DATE '2012-08-15', 'Game Designer', 1200),
-(1, 'Alex Brown', 0, DATE '1982-11-10', DATE '2008-01-05', 'Composer', 1800),
-(2, 'Emily Clark', 1, DATE '1988-09-23', DATE '2013-03-11', 'Animator', 900),
-(2, 'Michael White', 0, DATE '1981-03-17', DATE '2005-07-21', 'Software Engineer', 2200),
-(2, 'Laura Wilson', 1, DATE '1992-01-18', DATE '2016-09-09', 'Composer', 700),
-(3, 'Hiroshi Tanaka', 0, DATE '1975-06-05', DATE '2000-10-01', 'Game Designer', 2500),
-(3, 'Keiko Sato', 1, DATE '1983-12-14', DATE '2007-02-22', 'Software Engineer', 1900),
-(3, 'Takashi Ito', 0, DATE '1980-02-19', DATE '2005-06-17', 'Composer', 2000),
-(4, 'Pierre Dubois', 0, DATE '1986-08-30', DATE '2010-11-12', 'Level Designer', 1500),
-(4, 'Marie Dupont', 1, DATE '1991-05-05', DATE '2014-07-03', 'Animator', 800),
-(4, 'Jacques Rousseau', 0, DATE '1987-03-28', DATE '2012-04-15', 'Composer', 1100),
-(5, 'Robert Johnson', 0, DATE '1984-09-16', DATE '2008-06-29', 'Game Designer', 1800),
-(5, 'Sarah Lee', 1, DATE '1993-10-07', DATE '2017-08-25', 'Software Engineer', 600),
-(5, 'Tom Harris', 0, DATE '1985-12-19', DATE '2011-03-10', 'Composer', 1300),
-(6, 'Emily Davis', 1, DATE '1989-01-14', DATE '2013-09-01', 'Software Engineer', 1000),
-(6, 'James Miller', 0, DATE '1986-07-25', DATE '2012-05-15', 'Composer', 1400),
-(6, 'Charlotte Brown', 1, DATE '1992-02-20', DATE '2016-12-10', 'Game Tester', 500),
-(7, 'William Taylor', 0, DATE '1983-11-02', DATE '2009-08-20', 'Game Designer', 1600),
-(7, 'Sophia Martinez', 1, DATE '1990-06-09', DATE '2015-03-18', 'Animator', 700),
-(7, 'Liam Wilson', 0, DATE '1988-03-12', DATE '2011-07-14', 'Composer', 1200),
-(8, 'Oliver Moore', 0, DATE '1981-10-22', DATE '2007-06-01', 'Software Engineer', 2000),
-(8, 'Isabella Garcia', 1, DATE '1985-04-19', DATE '2010-11-30', 'Composer', 1600),
-(8, 'Ethan Martinez', 0, DATE '1991-09-06', DATE '2014-02-25', 'Level Designer', 900),
-(9, 'Ava Taylor', 1, DATE '1987-07-27', DATE '2012-01-14', 'Game Designer', 1400),
-(9, 'Mason Thomas', 0, DATE '1994-05-17', DATE '2018-04-22', 'Software Engineer', 500),
-(9, 'Sophia Scott', 1, DATE '1990-11-30', DATE '2013-08-20', 'Composer', 900),
-(10, 'Logan Martinez', 0, DATE '1979-03-15', DATE '2004-12-10', 'Software Engineer', 2300),
-(10, 'Mia Anderson', 1, DATE '1988-02-28', DATE '2012-03-04', 'Animator', 1200),
-(10, 'Lucas Lee', 0, DATE '1983-06-22', DATE '2009-05-12', 'Composer', 1700);
+INSERT INTO Employee (eDevCompID, eName, eGender, eBirthDate, eHireDate, eProfession, eGameWorkedOn, eDaysSpentOnProject) VALUES
+(1, 'John Smith', 0, DATE '1985-04-15', DATE '2010-05-20', 'Software Engineer', 1, 1500),
+(1, 'Jane Doe', 1, DATE '1990-07-12', DATE '2012-08-15', 'Game Designer', 2, 1200),
+(1, 'Alex Brown', 0, DATE '1982-11-10', DATE '2008-01-05', 'Composer', 3, 1800),
+(2, 'Emily Clark', 1, DATE '1988-09-23', DATE '2013-03-11', 'Animator', 4, 900),
+(2, 'Michael White', 0, DATE '1981-03-17', DATE '2005-07-21', 'Software Engineer', 5, 2200),
+(2, 'Laura Wilson', 1, DATE '1992-01-18', DATE '2016-09-09', 'Composer', 6, 700),
+(3, 'Hiroshi Tanaka', 0, DATE '1975-06-05', DATE '2000-10-01', 'Game Designer', 7, 2500),
+(3, 'Keiko Sato', 1, DATE '1983-12-14', DATE '2007-02-22', 'Software Engineer', 8, 1900),
+(3, 'Takashi Ito', 0, DATE '1980-02-19', DATE '2005-06-17', 'Composer', 9, 2000),
+(4, 'Pierre Dubois', 0, DATE '1986-08-30', DATE '2010-11-12', 'Level Designer', 10, 1500),
+(4, 'Marie Dupont', 1, DATE '1991-05-05', DATE '2014-07-03', 'Animator', 11, 800),
+(4, 'Jacques Rousseau', 0, DATE '1987-03-28', DATE '2012-04-15', 'Composer', 12, 1100),
+(5, 'Robert Johnson', 0, DATE '1984-09-16', DATE '2008-06-29', 'Game Designer', 13, 1800),
+(5, 'Sarah Lee', 1, DATE '1993-10-07', DATE '2017-08-25', 'Software Engineer', 14, 600),
+(5, 'Tom Harris', 0, DATE '1985-12-19', DATE '2011-03-10', 'Composer', 15, 1300),
+(6, 'Emily Davis', 1, DATE '1989-01-14', DATE '2013-09-01', 'Software Engineer', 16, 1000),
+(6, 'James Miller', 0, DATE '1986-07-25', DATE '2012-05-15', 'Composer', 17, 1400),
+(6, 'Charlotte Brown', 1, DATE '1992-02-20', DATE '2016-12-10', 'Game Tester', 18, 500),
+(7, 'William Taylor', 0, DATE '1983-11-02', DATE '2009-08-20', 'Game Designer', 19, 1600),
+(7, 'Sophia Martinez', 1, DATE '1990-06-09', DATE '2015-03-18', 'Animator', 20, 700),
+(7, 'Liam Wilson', 0, DATE '1988-03-12', DATE '2011-07-14', 'Composer', 21, 1200),
+(8, 'Oliver Moore', 0, DATE '1981-10-22', DATE '2007-06-01', 'Software Engineer', 22, 2000),
+(8, 'Isabella Garcia', 1, DATE '1985-04-19', DATE '2010-11-30', 'Composer', 23, 1600),
+(8, 'Ethan Martinez', 0, DATE '1991-09-06', DATE '2014-02-25', 'Level Designer', 24, 900),
+(9, 'Ava Taylor', 1, DATE '1987-07-27', DATE '2012-01-14', 'Game Designer', 25, 1400),
+(9, 'Mason Thomas', 0, DATE '1994-05-17', DATE '2018-04-22', 'Software Engineer', 26, 500),
+(9, 'Sophia Scott', 1, DATE '1990-11-30', DATE '2013-08-20', 'Composer', 27, 900),
+(10, 'Logan Martinez', 0, DATE '1979-03-15', DATE '2004-12-10', 'Software Engineer', 28, 2300),
+(10, 'Mia Anderson', 1, DATE '1988-02-28', DATE '2012-03-04', 'Animator', 28, 1200),
+(10, 'Lucas Lee', 0, DATE '1983-06-22', DATE '2009-05-12', 'Composer', 28, 1700);
 
 --Soundtrack table
 -- For gameID 1, composer 3

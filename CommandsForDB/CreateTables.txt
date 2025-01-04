@@ -85,8 +85,10 @@ CREATE TABLE Employee (
     eBirthDate DATE,
     eHireDate DATE,
     eProfession VARCHAR2(50),
-    eDateSpentOnProject INTEGER CHECK (eDateSpentOnProject >= 0),
-    FOREIGN KEY (eDevCompID) REFERENCES Developer(dID)
+    eGameWorkedOn INTEGER,
+    eDaysSpentOnProject INTEGER CHECK (eDaysSpentOnProject >= 0),
+    FOREIGN KEY (eDevCompID) REFERENCES Developer(dID),
+    FOREIGN KEY (eGameWorkedOn) REFERENCES Games(gID)
 );
 
 CREATE TABLE Soundtrack (

@@ -8,3 +8,67 @@ having avg(JSON_VALUE(reviewData, '$.rating' returning number)) >= 5;
 
 -- 2. feladat
 -- Melyik két felhasználó vált barátokká legközelebb egy játék kiadási dátumával?
+
+select p1.userNickname, p2.userNickname, g.gName, ABS(TRUNC(g.gReleaseDate - f.following_since)) as "Days since release and being friends" from Friends f
+join PUser p1 on f.userID = p1.userID
+join PUser p2 on f.friendID = p2.userID
+join UserOwnedGames u1 on u1.userid = p1.userID
+join UserOwnedGames u2 on u2.userid = p2.userID and u1.gameid = u2.gameid
+join Games g on u1.gameid = g.gID
+order by ABS(TRUNC(g.gReleaseDate - f.following_since)) asc
+FETCH FIRST 1 ROWS ONLY;
+
+-- 3. feladat
+-- Mia Anderson, a Square Enix dolgozója a 2023-10-27-én kiadott játékuk után otthagyta a céget. Töröld ki!
+
+delete from Employee
+where eName = 'Mia Anderson'
+and eDevCompID = ( select dID from Developer where dName = 'Square Enix');
+
+-- 4. feladat
+-- Az 1-es ID-jú játék kompózere megváltozott kiadás előtt, változtasd meg az ID-t 30asra
+update soundtrack
+set composer = 30
+where gameid = 1;
+
+-- 5. feladat
+-- Ha csinálnánk egy lejátszási listát az adatbázisban található zenékből, mennyire lenne hosszú? (Formázd nap, óra, perc és másodperc szerint)
+
+with TrackDurations as (
+    select JSON_VALUE(tracks, '$.length') as length
+    from Soundtrack),
+ConvertedDuration as (
+    select sum(extract(minute from to_dsinterval('0 00:' || length)) * 60 + extract(second from to_dsinterval('0 00:' || length))) as total_seconds
+    from TrackDurations),
+FormattedDuration as(
+    select
+        floor(total_seconds / 86400) as days,
+        floor(mod(total_seconds, 86400) / 3600) as hours,
+        floor(mod(total_seconds, 3600) / 60) as minutes,
+        mod(total_seconds, 60) as seconds
+    from ConvertedDuration)
+
+select * from FormattedDuration;
+
+-- 6. feladat
+-- A játékfejlesztő cégek közül hány százalékuk adja ki a saját játékát?
+
+with AllPublishers as(
+    select count(*) as TotalPublishers from Publisher),
+SelfPublishers as (
+    select count(*) as SelfPublisherCount from Publisher p
+    join Developer d on JSON_VALUE(p.pDevelopers, '$.devID') = d.dID and p.pName = d.dName)
+
+select (sp.SelfPublisherCount * 100/ ap.TotalPublishers) as Percentage from SelfPublishers sp cross join AllPublishers ap;
+
+-- 7. feladat
+-- Listázz ki minden kiadót és a cégeiket
+
+select p.pName,listagg(d.dName, ', ') within group (order by d.dName) AS "Developer(s)"
+from Publisher p
+left join json_table(
+       p.pDevelopers,
+       '$[*]' columns (devID int path'$.devID')
+) jt on 1 = 1
+left join Developer d on jt.devID = d.dID
+group by p.pName;
